@@ -4,14 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "nodemon index.js",
+    "test": "cross-env DB_ENV=testing jest --watch"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Essentialism-1-bw/Back-end.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "seongck",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Essentialism-1-bw/Back-end/issues"
