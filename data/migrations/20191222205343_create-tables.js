@@ -17,7 +17,7 @@ exports.up = function(knex) {
       tbl.string('lastName', 255)
         .notNullable();
 
-      tbl.string('dateOfBirth', 255)
+      tbl.date('dateOfBirth')
         .notNullable();
 
       tbl.string('countryRegion', 255)
