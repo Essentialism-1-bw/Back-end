@@ -14,12 +14,19 @@ async function getBy(filter) {
 }
 
 async function getById(id) {
+  return db('users')
+    .where({ id })
+    .first();
 }
 
 async function getAll() {
+  return db('users');
 }
 
 async function remove(id) {
+  return db('users')
+    .where({ id })
+    .del();
 }
 
 module.exports = {
