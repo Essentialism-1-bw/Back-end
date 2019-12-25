@@ -107,8 +107,8 @@ describe('users model', () => {
         countryRegion: 'Galaxy Far Away'
       })
 
-      let user1 = Users.getById(1);
-      let user2 = Users.getById(2);
+      let user1 = await Users.getById(1);
+      let user2 = await Users.getById(2);
 
       expect(user1.countryRegion).toBe('Dubai');
       expect(user1.lastName).toBe('There');
