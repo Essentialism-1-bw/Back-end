@@ -194,4 +194,37 @@ describe('users model', () => {
 
   });
 
+  describe('update', () => {
+    it('should update the user and return the new user info', async () => {
+      await Users.add({
+        id: 1,
+        email: 'hello@email.com',
+        password: 'asdf',
+        firstName: 'Hi',
+        lastName: 'There',
+        dateOfBirth: '1990-10-28',
+        countryRegion: 'Dubai'
+      })
+
+      const updatedUser = await Users.update({
+        id: 1,
+        email: 'goodbye@email.com',
+        password: 'asdf',
+        firstName: 'Goodbye',
+        lastName: 'There',
+        dateOfBirth: '1990-10-28',
+        countryRegion: 'Dubai'
+      }, 1);
+
+      expect(updatedUser.email).toBe('goodbye@email.com');
+      expect(updatedUser.firstName).toBe('Goodbye');
+    });
+
+    beforeEach(async () => {
+      await db('users').truncate();
+    });
+
+  });
+
+
 });

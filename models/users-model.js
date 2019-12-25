@@ -8,25 +8,35 @@ async function add(user) {
     .first();
 }
 
-async function getBy(filter) {
+function getBy(filter) {
   return db('users')
     .where(filter)
 }
 
-async function getById(id) {
+function getById(id) {
   return db('users')
     .where({ id })
     .first();
 }
 
-async function getAll() {
+function getAll() {
   return db('users');
 }
 
-async function remove(id) {
+function remove(id) {
   return db('users')
     .where({ id })
     .del();
+}
+
+async function update(user, id) {
+  await db('users')
+    .where({ id })
+    .update(user);
+
+  return db('users')
+    .where({ id })
+    .first();
 }
 
 module.exports = {
@@ -34,5 +44,6 @@ module.exports = {
   getBy,
   getById,
   getAll,
-  remove
+  remove,
+  update
 }
