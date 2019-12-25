@@ -13,6 +13,7 @@ describe('users model', () => {
         dateOfBirth: '1990-10-28',
         countryRegion: 'Dubai'
       })
+
       await Users.add({
         id: 2,
         email: 'luke@email.com',
@@ -25,5 +26,26 @@ describe('users model', () => {
 
       const newUsers = await db('users');
       expect(newUsers).toHaveLength(2);
+    });
+
+    it('should return the inserted user', async () => {
+      let user = await Users.add({
+        id: 1,
+        email: 'hello@email.com',
+        password: 'asdf',
+        firstName: 'Hi',
+        lastName: 'There',
+        dateOfBirth: '1990-10-28',
+        countryRegion: 'Dubai'
+      });
+
+      expect(user.email).toBe('hello@email.com')
+      expect(user.countryRegion).toBe('Dubai');
+    });
+
+    beforeEach(async () => {
+      await db('users').truncate();
+    });
   });
+
 });
