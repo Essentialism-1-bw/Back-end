@@ -9,6 +9,8 @@ async function add(user) {
 }
 
 async function getBy(filter) {
+  return db('users')
+    .where(filter)
 }
 
 async function getById(id) {
