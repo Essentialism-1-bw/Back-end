@@ -29,7 +29,7 @@ describe('values model', () => {
         name: 'Athleticism'
       });
 
-      expect(value.name).toBe('Atheleticism');
+      expect(value.name).toBe('Athleticism');
     });
 
     beforeEach(async () => {
@@ -104,12 +104,12 @@ describe('values model', () => {
       await Values.remove(2);
 
       const updatedValues = await db('values');
-      expected(updatedValues).toHaveLength(0);
+      expect(updatedValues).toHaveLength(0);
 
     });
 
     beforeEach(async () => {
-      await db('users').truncate();
+      await db('values').truncate();
     });
 
   });
