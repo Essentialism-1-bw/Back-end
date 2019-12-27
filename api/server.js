@@ -20,7 +20,7 @@ server.get('/', (req, res) => {
 });
 
 server.use('/api/users', authenticate, usersRouter);
-//server.use('/api/values', valuesRouter);
+server.use('/api/values', valuesRouter);
 //server.use('/api/reasons', reasonsRouter);
 //server.use('/api/projects', projectsRouter);
 server.use('/api/auth', authRouter);
