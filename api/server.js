@@ -14,16 +14,25 @@ const server = express();
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
-server.use(errorHandler);
 
 server.get('/', (req, res) => {
   res.status(200).json({ api: 'alive' });
 });
+
+server.use('/api/users', usersRouter);
+server.use('/api/values', valuesRouter);
+server.use('/api/reasons', reasonsRouter);
+server.use('/api/projects', projectsRouter);
+server.use('/api/auth', authRouter);
 
 function errorHandler(err, req, res, next) {
   res.status(err.status || 500).json({
     message: err.message || 'Internal Server Error'
   });
 }
+
+server.use(errorHandler);
+
+
 
 module.exports = server;
