@@ -5,21 +5,24 @@ module.exports = (req, res, next) => {
   const token = req.headers.authorization;
 
   if(token) {
-    jwt.verify(token, secrets.jwtSecret, (err, decodedToken) => {
+    jwt.verify(token, secret.jwtSecret, (err, decodedToken) => {
       if(err) {
-         next({
-            status: 401,
-            message: 'Access denied.  Please log in.'
-         });
+        res.status(401).json({ message: 'Access denied.  Please log in.' });
+         //next({
+         //   status: 401,
+         //   message: 'Access denied.  Please log in.'
+         //});
       } else {
         req.decodedJwt = decodedToken;
         next();
       }
     })
   } else {
-    next({
-      status: 401,
-      message: 'Access denied.  Please log in.'
-    });
+
+    res.status(401).json({ message: 'Access denied.  Please log in.' });
+    //next({
+    //  status: 401,
+    //  message: 'Access denied.  Please log in.'
+    //});
   }
 };
