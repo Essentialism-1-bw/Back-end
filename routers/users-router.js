@@ -1,11 +1,7 @@
-const express = require('express');
+const router = require('express').Router();
 const Users = require('../models/users-model.js');
 
-const server = express();
-
-server.use(express.json());
-
-server.get('/', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const users = await Users.getAll();
 
@@ -19,7 +15,7 @@ server.get('/', async (req, res, next) => {
 
 });
 
-server.get('/:id', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   const id = req.params.id;
 
   try {
@@ -37,4 +33,4 @@ server.get('/:id', async (req, res, next) => {
   }
 });
 
-module.exports = server;
+module.exports = router;
