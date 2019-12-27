@@ -5,7 +5,7 @@ const secret = require('../config/secret.js');
 const db = require('./../data/dbConfig.js');
 const Users = require('../models/users-model.js');
 
-router.post('/register', validateUser, (req, res, next) => {
+router.post('/register', (req, res, next) => {
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 12);
   user.password = hash;
@@ -53,27 +53,5 @@ function genToken(user) {
 
   return token;
 }
-
-function validateUser(req, res, next) {
-  const { user } = req;
-
-  if(Object.keys(user).length === 0 ) {
-    next({ status: 400, message: 'Missing user data' });
-  } else if (!body.email) {
-    next({ status: 400, message: 'Missing required email field' });
-  } else if (!body.password) {
-    next({ status: 400, message: 'Missing required password field' });
-  } else if (!body.firstName) {
-    next({ status: 400, message: 'Missing required first name field' });
-  } else if (!body.lastName) {
-    next({ status: 400, message: 'Missing required last name field' });
-  } else if (!body.dateOfBirth) {
-    next({ status: 400, message: 'Missing required date of birth field' });
-  } else if (!body.countryRegion) {
-    next({ status: 400, message: 'Missing required country/region field' });
-  } else {
-    next();
-  }
-};
 
 module.exports = router;
