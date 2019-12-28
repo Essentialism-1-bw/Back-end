@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Users = require('../models/users-model.js');
 const Projects = require('../models/projects-model.js');
 const Values = require('../models/values-model.js');
+const UsersValues = require('../models/users_values-model.js');
 const Reasons = require('../models/reasons-model.js');
 const bcrypt = require('bcryptjs');
 
@@ -214,6 +215,59 @@ router.delete('/:id/projects/:projectid', async (req, res, next) => {
 
 // user values endpoints
 router.get('/:id/values', async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const userValues = await UsersValues.get(id);
+
+    !userValues
+      ? next({
+        status: 404,
+        message: 'Error retrieving user values'
+      })
+      : res.status(200).json(userValues);
+  } catch(error) {
+    next(error);
+  }
+});
+
+router.post('/:id/values', async (req, res, next) => {
+  const { id } = req.params;
+
+  let uservalue = req.body;
+  uservalue.user_id = id;
+
+  try {
+    const result = await UsersValues.add(uservalue);
+
+    !result
+      ? next({
+        status: 404,
+        message: 'Error adding user values'
+      })
+      : res.status(201).json(result);
+  } catch(error){
+    next(error);
+  }
+});
+
+router.delete('/:id/values/:valueId', async (req, res, next) => {
+  const { id } = req.params;
+  const { valueId } = req.params;
+
+  try {
+    const result = await UsersValues.remove(id, valueId);
+
+    result !== 1
+      ? next({
+        status: 404,
+        message: 'Error deleting the user value'
+      })
+      : res.status(200).json({ message: 'User value succesfully deleted'});
+
+  } catch(error){
+    next(error);
+  }
 });
 
 module.exports = router;
