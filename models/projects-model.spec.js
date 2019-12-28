@@ -86,6 +86,40 @@ describe('projects model', () => {
 
   });
 
+  describe('getBy', () => {
+    it('should get the project by filter', async () => {
+      await Projects.add({
+        id: 1,
+        name: 'Eat a burger',
+        user_id: 1
+      });
+
+      await Projects.add({
+        id: 2,
+        name: 'Take over the galaxy',
+        user_id: 2
+      });
+
+      let user1projects = await Projects.getBy({ user_id: 1 });
+      let user2projects = await Projects.getBy({ user_id: 2 });
+
+      expect(user1projects).toHaveLength(1);
+      expect(user2projects).toHaveLength(1);
+
+      let project1 = user1projects[0];
+      let project2 = user2projects[0];
+
+      expect(project1.name).toBe('Eat a burger');
+      expect(project2.name).toBe('Take over the galaxy');
+    });
+
+    beforeEach(async () => {
+      await db('projects').truncate();
+    });
+
+  });
+
+
   describe('remove', () => {
     it('should remove the project from the db', async () => {
       await Projects.add({

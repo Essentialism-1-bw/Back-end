@@ -12,6 +12,11 @@ function getAll() {
   return db('projects');
 }
 
+function getBy(filter) {
+  return db('projects')
+    .where(filter);
+}
+
 function getById(id) {
   return db('projects')
     .where({ id })
@@ -38,6 +43,7 @@ module.exports = {
   add,
   getAll,
   getById,
+  getBy,
   remove,
   update
 };
