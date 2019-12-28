@@ -4,8 +4,6 @@ const helmet = require('helmet');
 
 const authenticate = require('./../auth/authenticate-middleware.js');
 const authRouter = require('./../routers/auth-router.js');
-const projectsRouter = require('./../routers/projects-router.js');
-const reasonsRouter = require('./../routers/reasons-router.js');
 const usersRouter = require('./../routers/users-router.js');
 const valuesRouter = require('./../routers/values-router.js');
 
@@ -21,8 +19,6 @@ server.get('/', (req, res) => {
 
 server.use('/api/users', authenticate, usersRouter);
 server.use('/api/values', valuesRouter);
-//server.use('/api/reasons', reasonsRouter);
-//server.use('/api/projects', projectsRouter);
 server.use('/api/auth', authRouter);
 
 function errorHandler(err, req, res, next) {
