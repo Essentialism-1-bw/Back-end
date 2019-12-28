@@ -29,14 +29,12 @@ function remove(id) {
     .del();
 }
 
-async function update(reason, id) {
+async function update(reason, user_id) {
   await db('reasons')
-    .where({ id })
+    .where({ user_id })
     .update(reason);
 
-  return db('reasons')
-    .where({ id })
-    .first();
+  return getBy({ user_id }).first();
 }
 
 module.exports = {

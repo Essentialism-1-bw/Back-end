@@ -1,5 +1,4 @@
 const Reasons = require('./reasons-model.js');
-//const Users = require('./users-model.js');
 const db = require('../data/dbConfig.js');
 
 describe('reasons model', () => {
@@ -152,14 +151,15 @@ describe('reasons model', () => {
         user_id: 1
       });
 
-      const updatedReason = await Reasons.update({
+      const reason = {
         id: 1,
         reason: 'This reason has been updated',
-        user_id: 2
-      }, 1);
+        user_id: 1
+      };
+
+      const updatedReason = await Reasons.update(reason, 1);
 
       expect(updatedReason.reason).toBe('This reason has been updated');
-      expect(updatedReason.user_id).toBe(2);
     });
 
     beforeEach(async () => {
