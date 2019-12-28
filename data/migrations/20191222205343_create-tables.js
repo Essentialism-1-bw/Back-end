@@ -58,7 +58,8 @@ exports.up = function(knex) {
         .notNullable()
         .references('users.id')
         .onDelete('CASCADE')
-        .onUpdate('CASCADE');
+        .onUpdate('CASCADE')
+        .unique();
     })
     .createTable('projects', tbl => {
       tbl.increments();
