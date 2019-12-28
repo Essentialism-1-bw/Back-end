@@ -18,6 +18,11 @@ function getById(id) {
     .first();
 }
 
+function getBy(filter) {
+  return db('reasons')
+    .where(filter);
+}
+
 function remove(id) {
   return db('reasons')
     .where({ id })
@@ -38,6 +43,7 @@ module.exports = {
   add,
   getAll,
   getById,
+  getBy,
   remove,
   update
 }
