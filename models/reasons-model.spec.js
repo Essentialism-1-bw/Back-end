@@ -1,30 +1,9 @@
 const Reasons = require('./reasons-model.js');
-//const Users = require('./users-model.js');
 const db = require('../data/dbConfig.js');
 
 describe('reasons model', () => {
   describe('add', () => {
     it('should add the reason into the db', async () => {
-      //await Users.add({
-      //  id: 1,
-      //  email: 'hello@email.com',
-      //  password: 'asdf',
-      //  firstName: 'Hi',
-      //  lastName: 'There',
-      //  dateOfBirth: '1990-10-28',
-      //  countryRegion: 'Dubai'
-      //})
-
-      //await Users.add({
-      //  id: 2,
-      //  email: 'vader@email.com',
-      //  password: 'lightsaber',
-      //  firstName: 'Darth',
-      //  lastName: 'Vader',
-      //  dateOfBirth: '1780-10-28',
-      //  countryRegion: 'Galaxy Far Away'
-      //})
-
       await Reasons.add({
         id: 1,
         reason: 'Because I want to',
@@ -99,6 +78,41 @@ describe('reasons model', () => {
 
   });
 
+  describe('getBy', () => {
+    it('should return the reasons by filter', async () => {
+      await Reasons.add({
+        id: 1,
+        reason: 'Because I want to',
+        user_id: 1
+      });
+
+      await Reasons.add({
+        id: 2,
+        reason: 'For all the reasons in the world',
+        user_id: 2
+      });
+
+      let user1reasons = await Reasons.getBy({ user_id: 1 });
+      let user2reasons = await Reasons.getBy({ user_id: 2 });
+
+      expect(user1reasons).toHaveLength(1);
+      expect(user2reasons).toHaveLength(1);
+
+      let reason1 = user1reasons[0];
+      let reason2 = user2reasons[0];
+
+      expect(reason1.reason).toBe('Because I want to');
+      expect(reason2.reason).toBe('For all the reasons in the world');
+
+    });
+
+    beforeEach(async () => {
+      await db('reasons').truncate();
+    });
+
+  });
+
+
   describe('remove', () => {
     it('should remove the reason from the db', async () => {
       await Reasons.add({
@@ -137,14 +151,15 @@ describe('reasons model', () => {
         user_id: 1
       });
 
-      const updatedReason = await Reasons.update({
+      const reason = {
         id: 1,
         reason: 'This reason has been updated',
-        user_id: 2
-      }, 1);
+        user_id: 1
+      };
+
+      const updatedReason = await Reasons.update(reason, 1);
 
       expect(updatedReason.reason).toBe('This reason has been updated');
-      expect(updatedReason.user_id).toBe(2);
     });
 
     beforeEach(async () => {
