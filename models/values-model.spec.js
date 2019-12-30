@@ -33,7 +33,7 @@ describe('values model', () => {
     });
 
     beforeEach(async () => {
-      await db('values').truncate();
+      await db('values').delete({});
     });
   });
 
@@ -55,7 +55,7 @@ describe('values model', () => {
     });
 
     beforeEach(async () => {
-      await db('values').truncate();
+      await db('values').delete({});
     });
   });
 
@@ -81,7 +81,7 @@ describe('values model', () => {
     });
 
     beforeEach(async () => {
-      await db('values').truncate();
+      await db('values').delete({});
     });
   });
 
@@ -109,7 +109,7 @@ describe('values model', () => {
     });
 
     beforeEach(async () => {
-      await db('values').truncate();
+      await db('values').delete({});
     });
 
   });

@@ -2,7 +2,7 @@
 exports.up = function(knex) {
    return (
      knex.schema.createTable('users', tbl => {
-      tbl.increments();
+      tbl.increments('id');
 
       tbl.string('email', 255)
         .notNullable()
@@ -24,7 +24,7 @@ exports.up = function(knex) {
         .notNullable();
     })
     .createTable('values', tbl => {
-      tbl.increments();
+      tbl.increments('id');
 
       tbl.string('name', 255)
         .notNullable()
@@ -48,7 +48,7 @@ exports.up = function(knex) {
       tbl.primary(['user_id', 'value_id']);
     })
     .createTable('reasons', tbl => {
-      tbl.increments();
+      tbl.increments('id');
 
       tbl.string('reason', 255)
         .notNullable();
@@ -56,13 +56,17 @@ exports.up = function(knex) {
       tbl.integer('user_id')
         .unsigned()
         .notNullable()
-        .references('users.id')
-        .onDelete('CASCADE')
-        .onUpdate('CASCADE')
         .unique();
+//        .references('users.id')
+
+      tbl.foreign('user_id')
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE');
     })
     .createTable('projects', tbl => {
-      tbl.increments();
+      tbl.increments('id');
 
       tbl.string('name', 255)
         .notNullable();
@@ -70,7 +74,11 @@ exports.up = function(knex) {
       tbl.integer('user_id')
         .unsigned()
         .notNullable()
-        .references('users.id')
+      //  .references('users.id')
+
+      tbl.foreign('user_id')
+        .references('id')
+        .inTable('users')
         .onDelete('CASCADE')
         .onUpdate('CASCADE');
     })

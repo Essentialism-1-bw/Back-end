@@ -1,7 +1,7 @@
 const db = require('../data/dbConfig.js');
 
 async function add(project) {
-  const [ id ] = await db('projects').insert(project);
+  const [ id ] = await db('projects').returning('id').insert(project);
 
   return db('projects')
     .where({ id })

@@ -8,21 +8,12 @@ module.exports = (req, res, next) => {
     jwt.verify(token, secret.jwtSecret, (err, decodedToken) => {
       if(err) {
         res.status(401).json({ message: 'Access denied.  Please log in.' });
-         //next({
-         //   status: 401,
-         //   message: 'Access denied.  Please log in.'
-         //});
       } else {
         req.decodedJwt = decodedToken;
         next();
       }
     })
   } else {
-
     res.status(401).json({ message: 'Access denied.  Please log in.' });
-    //next({
-    //  status: 401,
-    //  message: 'Access denied.  Please log in.'
-    //});
   }
 };
