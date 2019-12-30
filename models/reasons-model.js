@@ -1,7 +1,7 @@
 const db = require('../data/dbConfig.js');
 
 async function add(reason) {
-  const [ id ] = await db('reasons').insert(reason);
+  const [ id ] = await db('reasons').returning('id').insert(reason);
 
   return db('reasons')
     .where({ id })
