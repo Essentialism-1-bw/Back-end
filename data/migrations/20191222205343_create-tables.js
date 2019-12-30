@@ -56,10 +56,14 @@ exports.up = function(knex) {
       tbl.integer('user_id')
         .unsigned()
         .notNullable()
-        .references('users.id')
-        .onDelete('CASCADE')
-        .onUpdate('CASCADE')
         .unique();
+//        .references('users.id')
+
+      tbl.foreign('user_id')
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE');
     })
     .createTable('projects', tbl => {
       tbl.increments('id');
@@ -70,7 +74,11 @@ exports.up = function(knex) {
       tbl.integer('user_id')
         .unsigned()
         .notNullable()
-        .references('users.id')
+      //  .references('users.id')
+
+      tbl.foreign('user_id')
+        .references('id')
+        .inTable('users')
         .onDelete('CASCADE')
         .onUpdate('CASCADE');
     })
