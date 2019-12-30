@@ -2,7 +2,7 @@
 exports.up = function(knex) {
    return (
      knex.schema.createTable('users', tbl => {
-      tbl.increments();
+      tbl.increments('id');
 
       tbl.string('email', 255)
         .notNullable()
@@ -24,7 +24,7 @@ exports.up = function(knex) {
         .notNullable();
     })
     .createTable('values', tbl => {
-      tbl.increments();
+      tbl.increments('id');
 
       tbl.string('name', 255)
         .notNullable()
@@ -48,7 +48,7 @@ exports.up = function(knex) {
       tbl.primary(['user_id', 'value_id']);
     })
     .createTable('reasons', tbl => {
-      tbl.increments();
+      tbl.increments('id');
 
       tbl.string('reason', 255)
         .notNullable();
@@ -62,7 +62,7 @@ exports.up = function(knex) {
         .unique();
     })
     .createTable('projects', tbl => {
-      tbl.increments();
+      tbl.increments('id');
 
       tbl.string('name', 255)
         .notNullable();
