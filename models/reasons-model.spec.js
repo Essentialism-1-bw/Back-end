@@ -1,17 +1,34 @@
 const Reasons = require('./reasons-model.js');
+const Users = require('./users-model.js');
 const db = require('../data/dbConfig.js');
 
 describe('reasons model', () => {
   describe('add', () => {
     it('should add the reason into the db', async () => {
+      await Users.add({
+        email: 'hello@email.com',
+        password: 'asdf',
+        firstName: 'Hi',
+        lastName: 'There',
+        dateOfBirth: '1990-10-28',
+        countryRegion: 'Dubai'
+      });
+
+      await Users.add({
+        email: 'vader@email.com',
+        password: 'lightsaber',
+        firstName: 'Darth',
+        lastName: 'Vader',
+        dateOfBirth: '1780-10-28',
+        countryRegion: 'Galaxy Far Away'
+      });
+
       await Reasons.add({
-        id: 1,
         reason: 'Because I want to',
         user_id: 1
       });
 
       await Reasons.add({
-        id: 2,
         reason: 'For all the reasons in the world',
         user_id: 2
       });
@@ -21,20 +38,19 @@ describe('reasons model', () => {
     });
 
     beforeEach(async () => {
-      await db('reasons').truncate();
+      await db('reasons').del({});
+      await db.raw('TRUNCATE TABLE users RESTART IDENTITY CASCADE');
     });
   });
 
   describe('getById', () => {
     it('should return the reason by id', async () => {
       await Reasons.add({
-        id: 1,
         reason: 'Because I want to',
         user_id: 1
       });
 
       await Reasons.add({
-        id: 2,
         reason: 'For all the reasons in the world',
         user_id: 2
       });
@@ -47,7 +63,8 @@ describe('reasons model', () => {
     });
 
     beforeEach(async () => {
-      await db('reasons').truncate();
+      await db('reasons').del({});
+      await db.raw('TRUNCATE TABLE reasons RESTART IDENTITY CASCADE');
     });
 
   })
@@ -55,25 +72,21 @@ describe('reasons model', () => {
   describe('getAll', () => {
     it('should return all the reasons', async () => {
       await Reasons.add({
-        id: 1,
         reason: 'Because I want to',
         user_id: 1
       });
 
       await Reasons.add({
-        id: 2,
         reason: 'For all the reasons in the world',
         user_id: 2
       });
 
       let reasons = await Reasons.getAll();
-
       expect(reasons).toHaveLength(2);
-
     });
 
     beforeEach(async () => {
-      await db('reasons').truncate();
+      await db('reasons').del({});
     });
 
   });
@@ -81,13 +94,11 @@ describe('reasons model', () => {
   describe('getBy', () => {
     it('should return the reasons by filter', async () => {
       await Reasons.add({
-        id: 1,
         reason: 'Because I want to',
         user_id: 1
       });
 
       await Reasons.add({
-        id: 2,
         reason: 'For all the reasons in the world',
         user_id: 2
       });
@@ -107,7 +118,7 @@ describe('reasons model', () => {
     });
 
     beforeEach(async () => {
-      await db('reasons').truncate();
+      await db('reasons').del({});
     });
 
   });
@@ -116,13 +127,11 @@ describe('reasons model', () => {
   describe('remove', () => {
     it('should remove the reason from the db', async () => {
       await Reasons.add({
-        id: 1,
         reason: 'Because I want to',
         user_id: 1
       });
 
       await Reasons.add({
-        id: 2,
         reason: 'For all the reasons in the world',
         user_id: 2
       });
@@ -138,7 +147,8 @@ describe('reasons model', () => {
     });
 
     beforeEach(async () => {
-      await db('reasons').truncate();
+      await db.raw('TRUNCATE TABLE reasons RESTART IDENTITY CASCADE');
+      await db('reasons').del({});
     });
 
   });
@@ -146,13 +156,11 @@ describe('reasons model', () => {
   describe('update', () => {
     it('should update the reason and return the new reason', async () => {
       await Reasons.add({
-        id: 1,
         reason: 'Because I want to',
         user_id: 1
       });
 
       const reason = {
-        id: 1,
         reason: 'This reason has been updated',
         user_id: 1
       };
@@ -163,7 +171,7 @@ describe('reasons model', () => {
     });
 
     beforeEach(async () => {
-      await db('reasons').truncate();
+      await db('reasons').del({});
     });
 
   });
