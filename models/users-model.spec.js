@@ -5,8 +5,7 @@ describe('users model', () => {
   describe('add', () => {
     it('should insert the user into the db', async () => {
       await Users.add({
-        id: 1,
-        email: 'hello@email.com',
+        email: 'hithere@email.com',
         password: 'asdf',
         firstName: 'Hi',
         lastName: 'There',
@@ -15,7 +14,6 @@ describe('users model', () => {
       })
 
       await Users.add({
-        id: 2,
         email: 'vader@email.com',
         password: 'lightsaber',
         firstName: 'Darth',
@@ -30,7 +28,6 @@ describe('users model', () => {
 
     it('should return the inserted user', async () => {
       let user = await Users.add({
-        id: 1,
         email: 'hello@email.com',
         password: 'asdf',
         firstName: 'Hi',
@@ -44,14 +41,14 @@ describe('users model', () => {
     });
 
     beforeEach(async () => {
-      await db('users').truncate();
+      await db('users').del({});
+      //await db.raw('TRUNCATE TABLE users RESTART IDENTITY CASCADE');
     });
   });
 
   describe('get by', () => {
     it('should return the filtered users', async () => {
       await Users.add({
-        id: 1,
         email: 'hello@email.com',
         password: 'asdf',
         firstName: 'Hi',
@@ -61,7 +58,6 @@ describe('users model', () => {
       })
 
       await Users.add({
-        id: 2,
         email: 'vader@email.com',
         password: 'lightsaber',
         firstName: 'Darth',
@@ -81,14 +77,14 @@ describe('users model', () => {
     });
 
     beforeEach(async () => {
-      await db('users').truncate();
+      await db('users').del({});
+      //await db.raw('TRUNCATE TABLE users RESTART IDENTITY CASCADE');
     });
   });
 
   describe('get by id', () => {
     it('should return the user by id', async () => {
       await Users.add({
-        id: 1,
         email: 'hello@email.com',
         password: 'asdf',
         firstName: 'Hi',
@@ -98,7 +94,6 @@ describe('users model', () => {
       })
 
       await Users.add({
-        id: 2,
         email: 'vader@email.com',
         password: 'lightsaber',
         firstName: 'Darth',
@@ -118,7 +113,7 @@ describe('users model', () => {
     });
 
     beforeEach(async () => {
-      await db('users').truncate();
+      await db.raw('TRUNCATE TABLE users RESTART IDENTITY CASCADE');
     });
 
   });
@@ -126,7 +121,6 @@ describe('users model', () => {
   describe('get all', () => {
     it('should return all users', async () => {
       await Users.add({
-        id: 1,
         email: 'hello@email.com',
         password: 'asdf',
         firstName: 'Hi',
@@ -136,7 +130,6 @@ describe('users model', () => {
       })
 
       await Users.add({
-        id: 2,
         email: 'vader@email.com',
         password: 'lightsaber',
         firstName: 'Darth',
@@ -151,7 +144,8 @@ describe('users model', () => {
     });
 
     beforeEach(async () => {
-      await db('users').truncate();
+      //await db.raw('TRUNCATE TABLE users RESTART IDENTITY CASCADE');
+      await db('users').del({});
     });
 
   });
@@ -159,7 +153,6 @@ describe('users model', () => {
   describe('remove', () => {
     it('should remove the user from the db', async () => {
       await Users.add({
-        id: 1,
         email: 'hello@email.com',
         password: 'asdf',
         firstName: 'Hi',
@@ -169,7 +162,6 @@ describe('users model', () => {
       })
 
       await Users.add({
-        id: 2,
         email: 'vader@email.com',
         password: 'lightsaber',
         firstName: 'Darth',
@@ -189,7 +181,7 @@ describe('users model', () => {
     });
 
     beforeEach(async () => {
-      await db('users').truncate();
+      await db.raw('TRUNCATE TABLE users RESTART IDENTITY CASCADE');
     });
 
   });
@@ -197,7 +189,6 @@ describe('users model', () => {
   describe('update', () => {
     it('should update the user and return the new user info', async () => {
       await Users.add({
-        id: 1,
         email: 'hello@email.com',
         password: 'asdf',
         firstName: 'Hi',
@@ -207,7 +198,6 @@ describe('users model', () => {
       })
 
       const updatedUser = await Users.update({
-        id: 1,
         email: 'goodbye@email.com',
         password: 'asdf',
         firstName: 'Goodbye',
@@ -221,7 +211,7 @@ describe('users model', () => {
     });
 
     beforeEach(async () => {
-      await db('users').truncate();
+      await db.raw('TRUNCATE TABLE users RESTART IDENTITY CASCADE');
     });
 
   });
