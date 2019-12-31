@@ -1,8 +1,16 @@
-# Back-end
+# Essentialism Back End
 
-API for Essentialism.  An app that allows users to regain control over their choices about where to spend their time and energy - based on their core values.
+Backend APIs for Essentialism.  An app that allows users to regain control over their choices about where to spend their time and energy - based on their core values.
 
 Deployed at: https://bw-essentialism.herokuapp.com/
+
+### Test Account
+Email: john@email.com
+
+Password: password
+
+
+# Documentation
 
 - [Authentication](#authentication)
   - [Register user](#register-user)
