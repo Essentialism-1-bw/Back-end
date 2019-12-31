@@ -259,8 +259,6 @@ router.post('/:id/values', async (req, res, next) => {
   try {
     const result = await UsersValues.add(uservalue);
 
-    console.log('Result', result);
-
     !result
       ? next({
         status: 404,
