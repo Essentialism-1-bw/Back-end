@@ -452,7 +452,10 @@ Add user value example:
 
 Add user value success:
 ```
-   Currently returns a 500 status message, but the user value is added
+{
+  "user_id": 1,
+  "value_id": 2
+}
 ```
 
 ### Error Response
