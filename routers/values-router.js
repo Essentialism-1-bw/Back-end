@@ -58,7 +58,7 @@ router.delete('/:id', authenticate, async (req, res, next) => {
         status: 404,
         message: 'Error deleting the value'
       })
-      : res.status(200).json({ message: 'Value successfull deleted'});
+      : res.status(200).json({ message: 'Value successfully deleted'});
   } catch(error) {
     next(error);
   }

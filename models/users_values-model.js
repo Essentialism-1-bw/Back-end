@@ -3,6 +3,8 @@ const db = require('../data/dbConfig.js')
 async function add(uservalue) {
   const [ id ] = await db('users_values').insert(uservalue);
 
+  console.log('id', id);
+
   return db('users_values')
     .where({ 'user_id': uservalue.user_id, 'value_id': uservalue.value_id  })
     .first();

@@ -137,6 +137,25 @@ router.put('/:id/reasons', async (req, res, next) => {
   }
 });
 
+router.delete('/:id/reasons/:reasonId', async (req, res, next) => {
+  const { reasonId } = req.params;
+
+  try {
+    const result = await Reasons.remove(reasonId);
+
+    result !== 1
+      ? next({
+          status: 404,
+          message: 'Error deleting the reason'
+        })
+      : res.status(200).json({ message: 'Reason successfully deleted' });
+
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 // user projects endpoints
 
 router.get('/:id/projects', async (req, res, next) => {
@@ -207,7 +226,7 @@ router.delete('/:id/projects/:projectid', async (req, res, next) => {
         status: 404,
         message: 'Error deleting the project'
       })
-      : res.status(200).json({ message: 'Project succesfully deleted'});
+      : res.status(200).json({ message: 'Project successfully deleted'});
   } catch(error) {
     next(error);
   }
@@ -239,6 +258,8 @@ router.post('/:id/values', async (req, res, next) => {
 
   try {
     const result = await UsersValues.add(uservalue);
+
+    console.log('Result', result);
 
     !result
       ? next({
