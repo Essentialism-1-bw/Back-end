@@ -20,7 +20,8 @@ function getById(id) {
 
 function getBy(filter) {
   return db('reasons')
-    .where(filter);
+    .where(filter)
+    .first();
 }
 
 function remove(id) {
