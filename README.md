@@ -175,7 +175,17 @@ GET /api/users
 Get users example:
 
 ```
-   axios.get('https://bw-essentialism.herokuapp.com/api/users');
+  const axiosWithAuth = () => {
+    const token = localStorage.getItem('token');
+    return axios.create({
+      baseURL: "https://bw-essentialism.herokuapp.com",
+      headers: {
+        Authorization: token
+      }
+    });
+  };
+
+  axiosWithAuth().get('/api/users');
 ```
 ### Success Response
 
@@ -235,7 +245,17 @@ GET /api/users/:id
 Get user example:
 
 ```
-   axios.get('https://bw-essentialism.herokuapp.com/api/users/1');
+  const axiosWithAuth = () => {
+    const token = localStorage.getItem('token');
+    return axios.create({
+      baseURL: "https://bw-essentialism.herokuapp.com",
+      headers: {
+        Authorization: token
+      }
+    });
+  };
+
+  axiosWithAuth().get('/api/users/1');
 ```
 ### Success Response
 
@@ -289,7 +309,17 @@ PUT /api/users/:id
 Update user example:
 
 ```
-   axios.put('https://bw-essentialism.herokuapp.com/api/users/1', {
+  const axiosWithAuth = () => {
+    const token = localStorage.getItem('token');
+    return axios.create({
+      baseURL: "https://bw-essentialism.herokuapp.com",
+      headers: {
+        Authorization: token
+      }
+    });
+  };
+
+  axiosWithAuth().put('/api/users/1', {
     "email": "john@email.com",
     "password": "newpassword",
     "firstName": "John",
@@ -344,7 +374,17 @@ DELETE /api/users/:id
 Delete user example:
 
 ```
-   axios.delete('https://bw-essentialism.herokuapp.com/api/users/1');
+  const axiosWithAuth = () => {
+    const token = localStorage.getItem('token');
+    return axios.create({
+      baseURL: "https://bw-essentialism.herokuapp.com",
+      headers: {
+        Authorization: token
+      }
+    });
+  };
+
+  axiosWithAuth().delete('/api/users/1');
 ```
 ### Success Response
 
@@ -387,7 +427,17 @@ GET /api/users/:id/values
 Get user values example:
 
 ```
-   axios.get('https://bw-essentialism.herokuapp.com/api/users/1/values');
+  const axiosWithAuth = () => {
+    const token = localStorage.getItem('token');
+    return axios.create({
+      baseURL: "https://bw-essentialism.herokuapp.com",
+      headers: {
+        Authorization: token
+      }
+    });
+  };
+
+  axiosWithAuth().get('/api/users/1/values');
 ```
 ### Success Response
 
@@ -444,7 +494,17 @@ POST /api/users/:id/values
 Add user value example:
 
 ```
-   axios.post('https://bw-essentialism.herokuapp.com/api/users/1/values', {
+  const axiosWithAuth = () => {
+    const token = localStorage.getItem('token');
+    return axios.create({
+      baseURL: "https://bw-essentialism.herokuapp.com",
+      headers: {
+        Authorization: token
+      }
+    });
+  };
+
+  axiosWithAuth().post('/api/users/1/values', {
      value_id: 2
    });
 ```
@@ -490,7 +550,17 @@ DELETE /api/users/:id/values/:valueId
 Delete user value example:
 
 ```
-   axios.delete('https://bw-essentialism.herokuapp.com/api/users/1/values/2');
+  const axiosWithAuth = () => {
+    const token = localStorage.getItem('token');
+    return axios.create({
+      baseURL: "https://bw-essentialism.herokuapp.com",
+      headers: {
+        Authorization: token
+      }
+    });
+  };
+
+  axiosWithAuth().delete('/api/users/1/values/2');
 ```
 ### Success Response
 
@@ -533,7 +603,17 @@ GET /api/users/:id/reasons
 Get user reasons example:
 
 ```
-   axios.get('https://bw-essentialism.herokuapp.com/api/users/reasons');
+  const axiosWithAuth = () => {
+    const token = localStorage.getItem('token');
+    return axios.create({
+      baseURL: "https://bw-essentialism.herokuapp.com",
+      headers: {
+        Authorization: token
+      }
+    });
+  };
+
+  axiosWithAuth().get('/api/users/reasons');
 ```
 ### Success Response
 
@@ -577,9 +657,19 @@ POST /api/users/:id/reasons
 
 Add user reason example:
 ```
-   axios.post('https://bw-essentialism.herokuapp.com/api/users/1/reasons', {
+  const axiosWithAuth = () => {
+    const token = localStorage.getItem('token');
+    return axios.create({
+      baseURL: "https://bw-essentialism.herokuapp.com",
+      headers: {
+        Authorization: token
+      }
+    });
+  };
+
+  axiosWithAuth().post('/api/users/1/reasons', {
      "reason": "For health, wealth and wisdom"
-   });
+  });
 ```
 ### Success Response
 
@@ -624,9 +714,19 @@ PUT /api/users/:id/reasons/
 
 Update user reason example:
 ```
-   axios.put('https://bw-essentialism.herokuapp.com/api/users/1/reasons', {
+  const axiosWithAuth = () => {
+    const token = localStorage.getItem('token');
+    return axios.create({
+      baseURL: "https://bw-essentialism.herokuapp.com",
+      headers: {
+        Authorization: token
+      }
+    });
+  };
+
+  axiosWithAuth().put('/api/users/1/reasons', {
      "reason": "For world domination"
-   });
+  });
 ```
 ### Success Response
 
@@ -671,7 +771,17 @@ DELETE /api/users/:id/reasons/:reasonId
 
 Delete user reason example:
 ```
-   axios.delete('https://bw-essentialism.herokuapp.com/api/users/1/reasons/5');
+  const axiosWithAuth = () => {
+    const token = localStorage.getItem('token');
+    return axios.create({
+      baseURL: "https://bw-essentialism.herokuapp.com",
+      headers: {
+        Authorization: token
+      }
+    });
+  };
+
+  axiosWithAuth().delete('/api/users/1/reasons/5');
 ```
 ### Success Response
 
@@ -714,7 +824,17 @@ GET /api/users/:id/projects
 
 Get user projects example:
 ```
-   axios.get('https://bw-essentialism.herokuapp.com/api/users/1/projects');
+  const axiosWithAuth = () => {
+    const token = localStorage.getItem('token');
+    return axios.create({
+      baseURL: "https://bw-essentialism.herokuapp.com",
+      headers: {
+        Authorization: token
+      }
+    });
+  };
+
+  axiosWithAuth().get('/api/users/1/projects');
 ```
 ### Success Response
 
@@ -771,9 +891,19 @@ POST /api/users/:id/projects
 
 Add user project example:
 ```
-   axios.post('https://bw-essentialism.herokuapp.com/api/users/1/projects', {
+  const axiosWithAuth = () => {
+    const token = localStorage.getItem('token');
+    return axios.create({
+      baseURL: "https://bw-essentialism.herokuapp.com",
+      headers: {
+        Authorization: token
+      }
+    });
+  };
+
+  axiosWithAuth().post('/api/users/1/projects', {
      "name": "Complete this README"
-   });
+  });
 ```
 ### Success Response
 
@@ -818,9 +948,19 @@ PUT /api/users/:id/projects/:projectid
 
 Update user project example:
 ```
-   axios.put('https://bw-essentialism.herokuapp.com/api/users/1/projects/6', {
+  const axiosWithAuth = () => {
+    const token = localStorage.getItem('token');
+    return axios.create({
+      baseURL: "https://bw-essentialism.herokuapp.com",
+      headers: {
+        Authorization: token
+      }
+    });
+  };
+
+  axiosWithAuth().put('/api/users/1/projects/6', {
      "name": "Complete Essentialism Backend"
-   });
+  });
 ```
 ### Success Response
 
@@ -864,7 +1004,17 @@ DELETE /api/users/:id/projects/:projectid
 
 Delete user project example:
 ```
-   axios.delete('https://bw-essentialism.herokuapp.com/api/users/1/projects/1');
+  const axiosWithAuth = () => {
+    const token = localStorage.getItem('token');
+    return axios.create({
+      baseURL: "https://bw-essentialism.herokuapp.com",
+      headers: {
+        Authorization: token
+      }
+    });
+  };
+
+  axiosWithAuth().delete('/api/users/1/projects/1');
 ```
 ### Success Response
 
