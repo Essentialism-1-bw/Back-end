@@ -9,8 +9,50 @@ Email: john@email.com
 
 Password: password
 
+## Local Installation 
 
-# Documentation
+Make sure you have [PostgreSQL](https://www.postgresql.org/) and [pgAdmin4](https://www.pgadmin.org/) installed on your computer.
+
+```sh
+git clone https://github.com/Essentialism-1-bw/Back-end.git
+cd Back-end/
+npm install
+touch .env
+```
+
+In your `.env` file add your PostgreSQL password for user 'postgres':
+```javascript
+POSTGRES_PASSWORD="YOUR_POSTGRES_PASSWORD_HERE"
+```
+
+Run migrations and seeds:
+```sh
+npm run migrate
+npm run migrate-test
+npm run seed
+```
+
+To start the server:
+```sh
+npm run server
+// should now be live at localhost:5000
+```
+
+
+To run tests:
+
+**NOTE**: Currently there's an error when you try to run all the tests in one batch
+```sh
+// In /models directory
+npm run test <Name of test file>
+
+// Eg.
+npm run test users-model.spec.js
+npm run test values-model.spec.js
+```
+
+
+## Documentation
 
 - [Authentication](#authentication)
   - [Register user](#register-user)
