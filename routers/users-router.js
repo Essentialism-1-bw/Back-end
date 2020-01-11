@@ -5,6 +5,7 @@ const Values = require('../models/values-model.js');
 const UsersValues = require('../models/users_values-model.js');
 const Reasons = require('../models/reasons-model.js');
 const bcrypt = require('bcryptjs');
+const authenticate = require('../auth/authenticate-middleware.js');
 
 // user endpoints 
 router.get('/', async (req, res, next) => {
@@ -21,7 +22,7 @@ router.get('/', async (req, res, next) => {
 
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', authenticate, async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -40,7 +41,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', authenticate, async (req, res, next) => {
   const { id } = req.params;
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 12);
@@ -60,7 +61,7 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', authenticate, async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -80,7 +81,7 @@ router.delete('/:id', async (req, res, next) => {
 
 // user reason endpoints
 
-router.get('/:id/reasons', async (req, res, next) => {
+router.get('/:id/reasons', authenticate, async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -97,7 +98,7 @@ router.get('/:id/reasons', async (req, res, next) => {
   }
 });
 
-router.post('/:id/reasons', async (req, res, next) => {
+router.post('/:id/reasons', authenticate, async (req, res, next) => {
   const { id } = req.params;
 
   let reason = req.body;
@@ -117,7 +118,7 @@ router.post('/:id/reasons', async (req, res, next) => {
   }
 });
 
-router.put('/:id/reasons', async (req, res, next) => {
+router.put('/:id/reasons', authenticate, async (req, res, next) => {
   const { id } = req.params;
 
   let reason = req.body;
@@ -137,7 +138,7 @@ router.put('/:id/reasons', async (req, res, next) => {
   }
 });
 
-router.delete('/:id/reasons/:reasonId', async (req, res, next) => {
+router.delete('/:id/reasons/:reasonId', authenticate, async (req, res, next) => {
   const { reasonId } = req.params;
 
   try {
@@ -158,7 +159,7 @@ router.delete('/:id/reasons/:reasonId', async (req, res, next) => {
 
 // user projects endpoints
 
-router.get('/:id/projects', async (req, res, next) => {
+router.get('/:id/projects', authenticate, async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -175,7 +176,7 @@ router.get('/:id/projects', async (req, res, next) => {
   }
 });
 
-router.post('/:id/projects', async (req, res, next) => {
+router.post('/:id/projects', authenticate, async (req, res, next) => {
   const { id } = req.params;
   let project = req.body;
   project.user_id = id;
@@ -194,7 +195,7 @@ router.post('/:id/projects', async (req, res, next) => {
   }
 });
 
-router.put('/:id/projects/:projectid', async (req, res, next) => {
+router.put('/:id/projects/:projectid', authenticate, async (req, res, next) => {
   const { id } = req.params;
   const { projectid } = req.params;
 
@@ -215,7 +216,7 @@ router.put('/:id/projects/:projectid', async (req, res, next) => {
   }
 });
 
-router.delete('/:id/projects/:projectid', async (req, res, next) => {
+router.delete('/:id/projects/:projectid', authenticate, async (req, res, next) => {
   const { projectid } = req.params;
 
   try {
@@ -233,7 +234,7 @@ router.delete('/:id/projects/:projectid', async (req, res, next) => {
 });
 
 // user values endpoints
-router.get('/:id/values', async (req, res, next) => {
+router.get('/:id/values', authenticate, async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -250,7 +251,7 @@ router.get('/:id/values', async (req, res, next) => {
   }
 });
 
-router.post('/:id/values', async (req, res, next) => {
+router.post('/:id/values', authenticate, async (req, res, next) => {
   const { id } = req.params;
 
   let uservalue = req.body;
@@ -270,7 +271,7 @@ router.post('/:id/values', async (req, res, next) => {
   }
 });
 
-router.delete('/:id/values/:valueId', async (req, res, next) => {
+router.delete('/:id/values/:valueId', authenticate, async (req, res, next) => {
   const { id } = req.params;
   const { valueId } = req.params;
 
