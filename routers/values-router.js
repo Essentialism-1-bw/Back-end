@@ -47,11 +47,11 @@ router.post('/', authenticate, async (req, res, next) => {
     });
 });
 
-router.delete('/:id', authenticate, async (req, res, next) => {
-  const { id } = req.params;
+router.delete('/:valueid', authenticate, async (req, res, next) => {
+  const { valueid } = req.params;
 
   try {
-    const result = await Values.remove(id);
+    const result = await Values.remove(valueid);
 
     result !== 1
       ? next({
