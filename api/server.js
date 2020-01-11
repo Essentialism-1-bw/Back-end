@@ -17,7 +17,7 @@ server.get('/', (req, res) => {
   res.status(200).json({ api: 'alive' });
 });
 
-server.use('/api/users', authenticate, usersRouter);
+server.use('/api/users', usersRouter);
 server.use('/api/values', valuesRouter);
 server.use('/api/auth', authRouter);
 
